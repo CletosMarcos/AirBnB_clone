@@ -31,15 +31,17 @@ class BaseModel:
     def save(self):
         """updates instance attribute updated_at with the current datetime"""
         self.updated_at = datetime.now()
+        # save instance to json file
         storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values
             of __dict__ of the instance"""
 
-        self.__dict__["__class__"] = self.__class__.__name__
+        dictionary = self.__dict__.copy()
+        dictionary["__class__"] = self.__class__.__name__
 
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
+        dictionary["created_at"] = self.created_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
 
-        return self.__dict__
+        return dictionary

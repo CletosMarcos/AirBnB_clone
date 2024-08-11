@@ -14,8 +14,8 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}  # store all objects by <class name>.id
 
-    def all(self)
-    """Returns a dictionary of models currently in storage""":
+    def all(self):
+    """Returns a dictionary of models currently in storage"""
         return FileStorage.__objects
 
     def new(self, obj):

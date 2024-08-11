@@ -17,5 +17,8 @@ class HBNBCommand(cmd.Cmd):
     do_quit = do_EOF
     help_quit = help_EOF
 
+    def emptyline(self):
+        pass
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

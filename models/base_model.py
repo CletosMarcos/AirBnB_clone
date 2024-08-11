@@ -10,6 +10,9 @@ class BaseModel:
     """Defines all common attributes/methods for other classes"""
 
     def __init__(self, *args, **kwargs):
+        """initializes instance attributes
+        if kwargs is passed, an object is reloaded
+        else, create a new one"""
         if kwargs:
             for k, v in kwargs.items():
                 if k != "__class__":
@@ -26,6 +29,7 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
+        """Returns a tring representation of the instance"""
         return f"[{self.__class__.__name__}] ({self. id}) {self.__dict__}"
 
     def save(self):

@@ -14,11 +14,14 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}  # store all objects by <class name>.id
 
-    def all(self):
+    def all(self)
+    """Returns a dictionary of models currently in storage""":
         return FileStorage.__objects
 
     def new(self, obj):
-        """sets in __objects the obj with key <obj class name>.id"""
+        """sets in __objects the obj with key <obj class name>.id
+        in other words
+        Adds new object to storage dictionary"""
         key = f"{obj.__class__.__name__}.{obj.id}"
         FileStorage.__objects[key] = obj
 

@@ -70,6 +70,34 @@ class HBNBCommand(cmd.Cmd):
                        " based on the class name and id"]))
         print("[Usage]: show <className> <objectId>\n")
 
+    def do_destroy(self, obj):
+        objt = obj.partition(" ")
+        class_name = objt[0]
+        obj_id = objt[2]
+
+        if not class_name:
+            print("** class name missing **")
+            return
+        if class_name not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if not obj_id:
+            print("** instance id missing **")
+            return
+
+        # check if the id exists in the list of available objs (json file)
+        for k in storage.all().keys():
+            if obj_id == k.split(".")[1]:
+                del storage.all()[k]
+                storage.save()
+                return
+        print("** no instance found **")
+
+    def help_destroy(self):
+        print("".join(["Deletes an instance based on the class name",
+                       " and id (save the change into the JSON file)"]))
+        print("[Usage]: destroy <className> <objectId>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

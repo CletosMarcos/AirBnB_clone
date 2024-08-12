@@ -4,6 +4,7 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 
+
 class HBNBCommand(cmd.Cmd):
     """implements the command interpreter"""
 
@@ -38,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_create(self):
         print("".join(["Creates a new instance of BaseModel,",
-                    " saves it (to the JSON file) and prints the id"]))
+                       " saves it (to the JSON file) and prints the id"]))
         print("[Usage]: create <className>\n")
 
     def do_show(self, obj):
@@ -56,19 +57,17 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        try:
-            list_obj = storage.all()
-            for k, v in list_obj.items():
-                if obj_id == k.split(".")[1]:
-                    print(v)
-                    return
-            print("** no instance found **")
-        except:
-            pass
-    
+        # check if the id exists in the list of available objs (json file)
+        list_obj = storage.all()
+        for k, v in list_obj.items():
+            if obj_id == k.split(".")[1]:
+                print(v)
+                return
+        print("** no instance found **")
+ 
     def help_show(self):
         print("".join(["Prints the string representation of an instance",
-                " based on the class name and id"]))
+                       " based on the class name and id"]))
         print("[Usage]: show <className> <objectId>\n")
 
 

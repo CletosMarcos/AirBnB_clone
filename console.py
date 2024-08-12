@@ -98,6 +98,27 @@ class HBNBCommand(cmd.Cmd):
                        " and id (save the change into the JSON file)"]))
         print("[Usage]: destroy <className> <objectId>\n")
 
+    def do_all(self, obj):
+        list_obj = []
+
+        if obj:
+            if obj not in self.classes:
+                print("** class doesn't exist **")
+                return
+            for k, v in storage.all().items():
+                if k.split(".")[0] == obj:
+                    list_obj.append(str(v))
+        else:
+            for k, v in storage.all().items():
+                list_obj.append(str(v))
+
+        print(list_obj)
+
+    def help_all(self):
+        print("".join(["Prints all string representation of all instances",
+                       " based or not on the class name"]))
+        print("[Usage]: all <className>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

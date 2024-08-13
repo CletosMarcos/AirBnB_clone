@@ -64,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
                 print(v)
                 return
         print("** no instance found **")
- 
+
     def help_show(self):
         print("".join(["Prints the string representation of an instance",
                        " based on the class name and id"]))
@@ -118,6 +118,60 @@ class HBNBCommand(cmd.Cmd):
         print("".join(["Prints all string representation of all instances",
                        " based or not on the class name"]))
         print("[Usage]: all <className>\n")
+
+    def do_update(self, args):
+        args = args.split()
+
+        if len(args) < 1:
+            print("** class name missing **")
+            return
+        if args[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+
+        instance_key = f"{args[0]}.{args[1]}"
+        if instance_key not in storage.all():
+            print("** no instance found **")
+            return
+        if len(args) < 3:
+            print("** attribute name missing **")
+            return
+        if len(args) < 4:
+            print("** value missing **")
+            return
+
+        class_name = args[0]
+        instance_id = args[1]
+        attr_name = args[2]
+        attr_value = args[3]
+
+        if attr_name in ["id", "created_at", "updated_at"]:
+            print("** attribute cannot be updated **")
+
+        """list_types = [str, int, float]
+        if attr_value[0] != '\"' and attr_value[-1] != '\"':
+            attr_value = attr_value[1:-1]
+            if type()
+        """
+        try:
+            attr_value = int(attr_value)
+        except ValueError:
+            pass
+
+        """for k, v in storage.all().items:
+            if k == instance_key:
+                v.attr_name = attr_value
+        """
+        setattr(storage.all()[instance_key], attr_name, attr_value)
+        storage.save()
+
+    def help_update(self):
+        print("".join([" Updates an instance based on the class name and id",
+                       " by adding or updating attribute"]))
+        print("Usage: update <className> <id> <attName> <attVal>\n")
 
 
 if __name__ == "__main__":

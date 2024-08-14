@@ -66,11 +66,10 @@ class HBNBCommand(cmd.Cmd):
             return
 
         # check if the id exists in the list of available objs (json file)
-        list_obj = storage.all()
-        for k, v in list_obj.items():
-            if obj_id == k.split(".")[1]:
-                print(v)
-                return
+        instance_key = f"{class_name}.{obj_id}"
+        if instance_key in storage.all():
+            print(storage.all()[instance_key])
+            return
         print("** no instance found **")
 
     def help_show(self):
@@ -94,11 +93,11 @@ class HBNBCommand(cmd.Cmd):
             return
 
         # check if the id exists in the list of available objs (json file)
-        for k in storage.all().keys():
-            if obj_id == k.split(".")[1]:
-                del storage.all()[k]
-                storage.save()
-                return
+        instance_key = f"{class_name}.{obj_id}"
+        if instance_key in storage.all():
+            del storage.all()[instance_key]
+            storage.save()
+            return
         print("** no instance found **")
 
     def help_destroy(self):

@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
         if obj:
             # for k, v in classes.items():
             if obj in self.classes:
-                instance = classes[obj]()
+                instance = self.classes[obj]()
                 instance.save()
                 print(instance.id)
             else:

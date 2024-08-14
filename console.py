@@ -2,6 +2,7 @@
 """ contains the entry point of the command interpreter"""
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -11,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb)"
 
     # available classes
-    classes = ["BaseModel"]
+    classes = {"BaseModel": BaseModel, "User": User}
 
     def do_EOF(self, line):
         return True
@@ -29,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
         if obj:
             # for k, v in classes.items():
             if obj in self.classes:
-                instance = BaseModel()
+                instance = classes[obj]()
                 instance.save()
                 print(instance.id)
             else:
@@ -38,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def help_create(self):
-        print("".join(["Creates a new instance of BaseModel,",
+        print("".join(["Creates a new instance of a class,",
                        " saves it (to the JSON file) and prints the id"]))
         print("[Usage]: create <className>\n")
 

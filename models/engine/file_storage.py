@@ -37,9 +37,16 @@ class FileStorage:
         """deserializes the JSON file to __objects"""
         from models.base_model import BaseModel
         from models.user import User
+        from models.place import Place
+        from models.city import City
+        from models.state import State
+        from models.amenity import Amenity
+        from models.review import Review
 
         if os.path.exists(FileStorage.__file_path):
-            classes = {"BaseModel": BaseModel, "User": User}
+            classes = {"BaseModel": BaseModel, "User": User, "Place": Place,
+                       "State": State, "City": City,
+                       "Amenity": Amenity, "Review": Review}
             with open(FileStorage.__file_path) as f:
                 temp = {}
                 temp = json.load(f)

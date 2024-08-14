@@ -18,7 +18,8 @@ class HBNBCommand(cmd.Cmd):
 
     # available classes
     classes = {"BaseModel": BaseModel, "User": User, "Place": Place,
-                "State": State, "City": City, "Amenity": Amenity, "Review": Review}
+               "State": State, "City": City,
+               "Amenity": Amenity, "Review": Review}
 
     def do_EOF(self, line):
         return True

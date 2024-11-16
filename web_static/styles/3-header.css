@@ -8,5 +8,6 @@ header {
 #logo {
     content: url(../images/logo.png);
     margin-left: 20px;
+    margin-top: 5px;
 }
 

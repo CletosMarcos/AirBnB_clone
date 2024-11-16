@@ -6,7 +6,7 @@ header {
 }
 
 #logo {
-    content: url(images/logo.png);
+    content: url(../images/logo.png);
     margin-left: 20px;
 }
 
